@@ -8,13 +8,16 @@
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 
-<body>
+<body class="bg-light m-4">
 
     <div class="container">
         <div class="row">
             <div class="col-12 text-end">
-                <button class="btn btn-primary btn-sm">
-                    <img src="img/add.png" onclick="mostrarGuardar()" alt="">
+                <button class="btn btn-primary btn-sm" onclick="mostrarGuardar()">
+                    
+                    <img src="img/add.png" alt="Agregar"></img>
+                    <p>Agregar</p>
+                    
                 </button>
             </div>
         </div>
@@ -37,24 +40,24 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nom" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="nom" placeholder="Nombre">
+                        <input type="text" class="form-control" id="nom" placeholder="Nombre" required minlength="2" maxlength="50" pattern="[A-Za-z\s'-]{2,50}">
                     </div>
                     <div class="mb-3">
                         <label for="app" class="form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="app" placeholder="Apellido">
+                        <input type="text" class="form-control" id="app" placeholder="Apellido" required minlength="2" maxlength="50" pattern="[A-Za-z\s'-]{2,50}">
                     </div>
                     
                     <div class="mb-3">
                         <label for="tel" class="form-label">Telefono:</label>
-                        <input type="text" class="form-control" id="tel" placeholder="Telefono">
+                        <input type="tel" class="form-control" id="tel" placeholder="Telefono" required inputmode="numeric" pattern="\d{7,15}" maxlength="15">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com">
+                        <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com" required>
                     </div>
                     <div class="mb-3">
                         <label for="clave" class="form-label">Clave:</label>
-                        <input type="text" class="form-control" id="clave" placeholder="Clave de usuario">
+                        <input type="text" class="form-control" id="clave" placeholder="Clave de usuario" required minlength="4" maxlength="30">
                     </div>
                 </div>
                 
@@ -77,23 +80,23 @@
                     <div class="mb-3">
                         <label for="nom2" class="form-label">Nombre:</label>
                         <input type="hidden" class="form-control" id="id2">
-                        <input type="text" class="form-control" id="nom2" placeholder="Nombre">
+                        <input type="text" class="form-control" id="nom2" placeholder="Nombre" required minlength="2" maxlength="50" pattern="[A-Za-z\s'-]{2,50}">
                     </div>
                     <div class="mb-3">
                         <label for="app2" class="form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="app2" placeholder="Apellido">
+                        <input type="text" class="form-control" id="app2" placeholder="Apellido" required minlength="2" maxlength="50" pattern="[A-Za-z\s'-]{2,50}">
                     </div>
                     <div class="mb-3">
                         <label for="clave2" class="form-label">Clave:</label>
-                        <input type="text" class="form-control" id="clave2" placeholder="Clave de usuario">
+                        <input type="text" class="form-control" id="clave2" placeholder="Clave de usuario" required minlength="1" maxlength="30">
                     </div>
                     <div class="mb-3">
                         <label for="tel2" class="form-label">Telefono:</label>
-                        <input type="text" class="form-control" id="tel2" placeholder="Telefono">
+                        <input type="tel" class="form-control" id="tel2" placeholder="Telefono" required inputmode="numeric" pattern="\d{7,15}" maxlength="15">
                     </div>
                     <div class="mb-3">
                         <label for="email2" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email2" placeholder="correo@ejemplo.com">
+                        <input type="email" class="form-control" id="email2" placeholder="correo@ejemplo.com" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -108,7 +111,63 @@
     <script src="js/bootstrap.js"></script>
     <script>
         const API_URL = "http://localhost:8000/index.php";
-        const DEFAULT_CLAVE = "0";
+        const DEFAULT_CLAVE = "";
+        const NAME_REGEX = /^[\p{L}\s'-]{2,50}$/u;
+        const EMAIL_REGEX = /^[\w.-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+        function limpiarTelefono(telefono) {
+            return (telefono || "").replace(/\D/g, "");
+        }
+
+        function mostrarErrores(errores) {
+            alert("Revisa los datos ingresados:\n\n" + errores.join("\n"));
+        }
+
+        function validarCampos(nombre, apellidos, telefono, email, clave) {
+            const errores = [];
+            const nombreTrim = (nombre || "").trim();
+            const apellidosTrim = (apellidos || "").trim();
+            const emailTrim = (email || "").trim();
+            const claveTrim = (clave === undefined || clave === null ? "" : String(clave)).trim();
+            const telefonoNumerico = limpiarTelefono(telefono);
+
+            if (!nombreTrim) {
+                errores.push("El nombre es obligatorio.");
+            } else if (!NAME_REGEX.test(nombreTrim)) {
+                errores.push("El nombre solo acepta letras, espacios (2-50 caracteres).");
+            }
+            if (!apellidosTrim) {
+                errores.push("El apellido es obligatorio.");
+            } else if (!NAME_REGEX.test(apellidosTrim)) {
+                errores.push("El apellido solo acepta letras, espacios (2-50 caracteres).");
+            }
+            if (!telefonoNumerico) {
+                errores.push("El telefono es obligatorio.");
+            } else if (telefonoNumerico.length < 7 || telefonoNumerico.length > 15) {
+                errores.push("El telefono debe tener entre 7 y 15 digitos.");
+            }
+            if (!emailTrim) {
+                errores.push("El email es obligatorio.");
+            } else if (!EMAIL_REGEX.test(emailTrim)) {
+                errores.push("El email no tiene un formato valido.");
+            }
+            if (!claveTrim) {
+                errores.push("La clave es obligatoria.");
+            }
+
+            if (errores.length) {
+                mostrarErrores(errores);
+                return null;
+            }
+
+            return {
+                nombre: nombreTrim,
+                apellidos: apellidosTrim,
+                telefono: telefonoNumerico,
+                email: emailTrim,
+                clave: claveTrim
+            };
+        }
 
         function callApi(params, onSuccess) {
             $.ajax({
@@ -171,14 +230,18 @@
             var tel = $("#tel").val();
             var email = $("#email").val();
             var clave = $("#clave").val() || DEFAULT_CLAVE;
+            const datos = validarCampos(nom, app, tel, email, clave);
+            if (!datos) {
+                return;
+            }
             callApi(
                 {
                     tipo: 2,
-                    nombre: nom,
-                    apellidos: app,
-                    telefono: tel,
-                    email: email,
-                    clave: clave,
+                    nombre: datos.nombre,
+                    apellidos: datos.apellidos,
+                    telefono: datos.telefono,
+                    email: datos.email,
+                    clave: datos.clave,
                     r: Date.now()
                 },
                 function () {
@@ -253,15 +316,19 @@
             var tel = $("#tel2").val();
             var email = $("#email2").val();
             var clave = $("#clave2").val();
+            const datos = validarCampos(nom, app, tel, email, clave);
+            if (!datos) {
+                return;
+            }
             callApi(
                 {
                     tipo: 3,
                     id: id,
-                    nombre: nom,
-                    apellidos: app,
-                    telefono: tel,
-                    email: email,
-                    clave: clave,
+                    nombre: datos.nombre,
+                    apellidos: datos.apellidos,
+                    telefono: datos.telefono,
+                    email: datos.email,
+                    clave: datos.clave,
                     r: Date.now()
                 },
                 function () {

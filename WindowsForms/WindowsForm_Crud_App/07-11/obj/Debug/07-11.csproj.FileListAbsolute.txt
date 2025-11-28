@@ -1,0 +1,42 @@
+C:\Users\24310\source\repos\07-11\07-11\bin\Debug\07-11.exe.config
+C:\Users\24310\source\repos\07-11\07-11\bin\Debug\07-11.exe
+C:\Users\24310\source\repos\07-11\07-11\bin\Debug\07-11.pdb
+C:\Users\24310\source\repos\07-11\07-11\obj\Debug\07-11.csproj.AssemblyReference.cache
+C:\Users\24310\source\repos\07-11\07-11\obj\Debug\_07_11.Form1.resources
+C:\Users\24310\source\repos\07-11\07-11\obj\Debug\_07_11.Properties.Resources.resources
+C:\Users\24310\source\repos\07-11\07-11\obj\Debug\07-11.csproj.GenerateResource.cache
+C:\Users\24310\source\repos\07-11\07-11\obj\Debug\07-11.csproj.CoreCompileInputs.cache
+C:\Users\24310\source\repos\07-11\07-11\obj\Debug\07-11.exe
+C:\Users\24310\source\repos\07-11\07-11\obj\Debug\07-11.pdb
+C:\Users\24310\source\repos\07-11\07-11\obj\Debug\07-11.exe.config
+C:\Users\24310\source\repos\07-11\07-11\bin\Debug\Newtonsoft.Json.dll
+C:\Users\24310\source\repos\07-11\07-11\bin\Debug\Newtonsoft.Json.xml
+C:\Users\24310\source\repos\07-11\07-11\obj\Debug\07-11.csproj.Up2Date
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\bin\Debug\07-11.exe.config
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\bin\Debug\07-11.exe
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\bin\Debug\07-11.pdb
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\bin\Debug\Newtonsoft.Json.dll
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\bin\Debug\Newtonsoft.Json.xml
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\obj\Debug\07-11.csproj.AssemblyReference.cache
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\obj\Debug\07-11.exe.config
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\obj\Debug\_07_11.Properties.Resources.resources
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\obj\Debug\07-11.csproj.GenerateResource.cache
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\obj\Debug\07-11.csproj.CoreCompileInputs.cache
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\obj\Debug\07-11.csproj.Up2Date
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\obj\Debug\07-11.exe
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\obj\Debug\07-11.pdb
+C:\Users\antho\Documents\Distribuida\07-11 (1)\07-11\07-11\obj\Debug\_07_11.CRUD_AGENDA.resources
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\bin\Debug\07-11.exe.config
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\bin\Debug\07-11.exe
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\bin\Debug\07-11.pdb
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\bin\Debug\Newtonsoft.Json.dll
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\bin\Debug\Newtonsoft.Json.xml
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\obj\Debug\07-11.csproj.AssemblyReference.cache
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\obj\Debug\07-11.exe.config
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\obj\Debug\_CRUD_Agenda.CRUD_AGENDA.resources
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\obj\Debug\_07_11.Properties.Resources.resources
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\obj\Debug\07-11.csproj.GenerateResource.cache
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\obj\Debug\07-11.csproj.CoreCompileInputs.cache
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\obj\Debug\07-11.csproj.Up2Date
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\obj\Debug\07-11.exe
+C:\Users\antho\Documents\Distribuida\github\WindowsForms\WindowsForm_Crud_App\07-11\obj\Debug\07-11.pdb

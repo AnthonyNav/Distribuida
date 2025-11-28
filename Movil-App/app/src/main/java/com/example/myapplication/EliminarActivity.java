@@ -19,6 +19,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Random;
 
 public class EliminarActivity extends AppCompatActivity {
@@ -47,25 +51,56 @@ public class EliminarActivity extends AppCompatActivity {
         });
     }
     public void eliminar(View view){
-        String id = textId.getText().toString();
+        String id = textId.getText().toString().trim();
         String error="";
-        if(id.equals("")){
+        if(id.isEmpty()){
             error+="Ingrese el ID\n";
+        } else if(!id.matches("\\d+")){
+            error+="El ID debe ser numérico\n";
         }
+        
         if(error.equals("")){
-            String url = Config.URL_API + "?tipo=4&clave=0&id=" + id + "&r="+new Random().nextInt();
+            String url = Config.URL_API + "?tipo=4&clave=0&id=" + id;
             RequestQueue queue = Volley.newRequestQueue(this);
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            if (response == null || response.trim().isEmpty() || response.equals("null")) {
+                                alertInfo("No se encontró el registro o no se pudo eliminar.");
+                                return;
+                            }
+                            
+                             if (response.trim().equalsIgnoreCase("false")) {
+                                alertInfo("No se encontró el registro para eliminar.");
+                                return;
+                            }
+
+                            try {
+                                JSONObject jsonResponse = new JSONObject(response);
+                                if (jsonResponse.has("error")) {
+                                     alertInfo("Error: " + jsonResponse.getString("error"));
+                                     return;
+                                }
+                            } catch (JSONException e) {
+                            }
+
                             textId.setText("");
-                            alertInfo("Se elimino el contacto");
+                            alertInfo("Se eliminó el contacto");
                         }
                     },new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            alertInfo(error.getMessage().toString());
+                            String mensaje = "Error en la petición";
+                            if (error.networkResponse != null) {
+                                mensaje += " (Código " + error.networkResponse.statusCode + ")";
+                                if(error.networkResponse.data != null) {
+                                    mensaje += "\n" + new String(error.networkResponse.data);
+                                }
+                            } else if (error.getMessage() != null) {
+                                mensaje += ": " + error.getMessage();
+                            }
+                            alertInfo(mensaje);
                         }
                     });
             queue.add(stringRequest);

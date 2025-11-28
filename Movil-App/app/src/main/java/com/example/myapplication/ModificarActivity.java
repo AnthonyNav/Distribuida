@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,20 +74,24 @@ public class ModificarActivity extends AppCompatActivity {
     }
 
     public void buscar(View view) {
-        String id = textId.getText().toString();
-        if (id.equals("")) {
+        String id = textId.getText().toString().trim();
+        if (id.isEmpty()) {
             alertInfo("Ingrese el ID para buscar");
             return;
         }
+        if (!id.matches("\\d+")) {
+            alertInfo("El ID debe ser numérico");
+            return;
+        }
 
-        String url = Config.URL_API + "?tipo=5&id=" + id + "&r=" + new Random().nextInt();
+        String url = Config.URL_API + "?tipo=5&id=" + id;
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if (response == null || response.trim().isEmpty()) {
+                        if (response == null || response.trim().isEmpty() || response.equals("null")) {
                             alertInfo("No se encontró información para ese ID");
                             return;
                         }
@@ -102,11 +107,17 @@ public class ModificarActivity extends AppCompatActivity {
                                     contacto = jsonArray.getJSONObject(0);
                                 }
                             } else {
+                                // Podría venir {"dato": null} o {"dato": []}
                                 JSONObject jsonResponse = new JSONObject(response);
-                                // A veces viene directo o dentro de "dato"
+                                
                                 if (jsonResponse.has("dato")) {
-                                     JSONArray arr = jsonResponse.optJSONArray("dato");
-                                     if(arr != null && arr.length() > 0) contacto = arr.getJSONObject(0);
+                                     if (!jsonResponse.isNull("dato")) {
+                                        Object datoObj = jsonResponse.get("dato");
+                                        if (datoObj instanceof JSONArray) {
+                                            JSONArray arr = (JSONArray) datoObj;
+                                            if(arr.length() > 0) contacto = arr.getJSONObject(0);
+                                        }
+                                     }
                                 } else {
                                     // Asumimos que es el objeto directo
                                     contacto = jsonResponse;
@@ -118,13 +129,9 @@ public class ModificarActivity extends AppCompatActivity {
                                 textApe.setText(contacto.optString("apellidos", contacto.optString("app")));
                                 textTel.setText(contacto.optString("telefono", contacto.optString("tel")));
                                 textEmail.setText(contacto.optString("gmail", contacto.optString("email")));
-                                
-                                // La clave por lo general no se devuelve por seguridad, pero si viene, la ponemos.
-                                // Si no, ponemos "0" o vacío.
                                 textClave.setText(contacto.optString("clave", "0"));
                                 
                                 btnModificar.setEnabled(true);
-                                // Bloquear ID para no cambiarlo accidentalmente
                                 textId.setEnabled(false); 
                                 btnBuscar.setEnabled(false);
                             } else {
@@ -133,33 +140,52 @@ public class ModificarActivity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             Log.e("ModificarActivity", "Error parseo: " + e.getMessage());
-                            alertInfo("Error al leer los datos: " + e.getMessage());
+                            // A veces el servidor devuelve texto plano o JSON inválido si no encuentra
+                            alertInfo("No se encontró el registro o error al leer: " + e.getMessage());
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        alertInfo("Error de conexión: " + error.getMessage());
+                        String mensaje = "Error de conexión";
+                        if (error.networkResponse != null) {
+                            mensaje += " (Código " + error.networkResponse.statusCode + ")";
+                            if(error.networkResponse.data != null) {
+                                mensaje += "\n" + new String(error.networkResponse.data);
+                            }
+                        } else if (error.getMessage() != null) {
+                            mensaje += ": " + error.getMessage();
+                        }
+                        alertInfo(mensaje);
                     }
                 });
         queue.add(stringRequest);
     }
 
     public void modificar(View view){
-        String id = textId.getText().toString();
-        String nom = textNom.getText().toString();
-        String app = textApe.getText().toString();
-        String tel = textTel.getText().toString();
-        String email = textEmail.getText().toString();
-        String clave = textClave.getText().toString();
+        String id = textId.getText().toString().trim();
+        String nom = textNom.getText().toString().trim();
+        String app = textApe.getText().toString().trim();
+        String tel = textTel.getText().toString().trim();
+        String email = textEmail.getText().toString().trim();
+        String clave = textClave.getText().toString().trim();
         
         String error="";
-        if(nom.equals("")){ error+="Ingrese el nombre\n"; }
-        if(app.equals("")){ error+="Ingrese el apellido\n"; }
-        if(tel.equals("")){ error+="Ingrese el teléfono\n"; }
+        if(nom.isEmpty()){ error+="Ingrese el nombre\n"; }
+        else if(!nom.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+")){ error+="El nombre solo debe contener letras\n"; }
+
+        if(app.isEmpty()){ error+="Ingrese el apellido\n"; }
+        else if(!app.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+")){ error+="El apellido solo debe contener letras\n"; }
+
+        if(tel.isEmpty()){ error+="Ingrese el teléfono\n"; }
+        else if(!tel.matches("\\d+")){ error+="El teléfono solo debe contener números\n"; }
+        else if(tel.length() < 7 || tel.length() > 15){ error+="El teléfono debe tener entre 7 y 15 dígitos\n"; }
         
-        if(clave.equals("")) clave = "0";
+        if(email.isEmpty()){ error+="Ingrese el email\n"; }
+        else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){ error+="Email inválido\n"; }
+
+        if(clave.isEmpty()){ error+="Ingrese la clave\n"; }
         
         if(error.equals("")){
             String url = Config.URL_API + "?tipo=3&id=" + id + 
@@ -167,16 +193,22 @@ public class ModificarActivity extends AppCompatActivity {
                          "&apellidos=" + app + 
                          "&telefono=" + tel + 
                          "&gmail=" + email + 
-                         "&clave=" + clave + 
-                         "&r=" + new Random().nextInt();
+                         "&clave=" + clave;
             
             RequestQueue queue = Volley.newRequestQueue(this);
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                             if (response == null || response.trim().isEmpty() || response.equals("null")) {
+                                alertInfo("No se pudo modificar, el registro podría no existir.");
+                                return;
+                             }
+                             // Dependiendo de la respuesta del servidor, validar exito
+                             // Asumimos éxito si llega aquí, pero idealmente parsear respuesta
+                             
                             alertInfo("Se modificó el contacto correctamente");
-                            // Resetear formulario para otra búsqueda
+                            
                             textId.setText("");
                             textId.setEnabled(true);
                             btnBuscar.setEnabled(true);
@@ -192,7 +224,16 @@ public class ModificarActivity extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            alertInfo(error.getMessage() != null ? error.getMessage() : "Error al modificar");
+                            String mensaje = "Error al modificar";
+                            if (error.networkResponse != null) {
+                                mensaje += " (Código " + error.networkResponse.statusCode + ")";
+                                if(error.networkResponse.data != null) {
+                                    mensaje += "\n" + new String(error.networkResponse.data);
+                                }
+                            } else if (error.getMessage() != null) {
+                                mensaje += ": " + error.getMessage();
+                            }
+                            alertInfo(mensaje);
                         }
                     });
             queue.add(stringRequest);

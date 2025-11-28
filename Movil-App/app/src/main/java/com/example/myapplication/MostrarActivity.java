@@ -48,7 +48,7 @@ public class MostrarActivity extends AppCompatActivity {
     }
 
     public void mostrar(){
-        String url = Config.URL_API + "?tipo=1&r=" + new Random().nextInt();
+        String url = Config.URL_API + "?tipo=1";
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -137,8 +137,13 @@ public class MostrarActivity extends AppCompatActivity {
                         String mensaje = "Error de conexión";
                         if (error.networkResponse != null) {
                             mensaje += " (Código " + error.networkResponse.statusCode + ")";
+                            if(error.networkResponse.data != null) {
+                                mensaje += "\n" + new String(error.networkResponse.data);
+                            }
+                        } else if (error.getMessage() != null) {
+                            mensaje += ": " + error.getMessage();
                         }
-                        alertInfo(mensaje + ": " + (error.getMessage() != null ? error.getMessage() : ""));
+                        alertInfo(mensaje);
                     }
                 });
         queue.add(stringRequest);

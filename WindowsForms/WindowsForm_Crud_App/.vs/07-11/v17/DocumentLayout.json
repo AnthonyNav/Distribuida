@@ -1,0 +1,72 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\antho\\Documents\\Distribuida\\github\\WindowsForms\\WindowsForm_Crud_App\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5069A314-CEE5-4D87-BE86-625E11EDCEEC}|07-11\\07-11.csproj|c:\\users\\antho\\documents\\distribuida\\github\\windowsforms\\windowsform_crud_app\\07-11\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5069A314-CEE5-4D87-BE86-625E11EDCEEC}|07-11\\07-11.csproj|solutionrelative:07-11\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5069A314-CEE5-4D87-BE86-625E11EDCEEC}|07-11\\07-11.csproj|C:\\Users\\antho\\Documents\\Distribuida\\github\\WindowsForms\\WindowsForm_Crud_App\\07-11\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5069A314-CEE5-4D87-BE86-625E11EDCEEC}|07-11\\07-11.csproj|solutionrelative:07-11\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5069A314-CEE5-4D87-BE86-625E11EDCEEC}|07-11\\07-11.csproj|C:\\Users\\antho\\Documents\\Distribuida\\github\\WindowsForms\\WindowsForm_Crud_App\\07-11\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5069A314-CEE5-4D87-BE86-625E11EDCEEC}|07-11\\07-11.csproj|solutionrelative:07-11\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\antho\\Documents\\Distribuida\\github\\WindowsForms\\WindowsForm_Crud_App\\07-11\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "07-11\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\antho\\Documents\\Distribuida\\github\\WindowsForms\\WindowsForm_Crud_App\\07-11\\Form1.Designer.cs",
+              "RelativeToolTip": "07-11\\Form1.Designer.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAApwFUAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T00:45:18.067Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\antho\\Documents\\Distribuida\\github\\WindowsForms\\WindowsForm_Crud_App\\07-11\\Form1.cs",
+              "RelativeDocumentMoniker": "07-11\\Form1.cs",
+              "ToolTip": "C:\\Users\\antho\\Documents\\Distribuida\\github\\WindowsForms\\WindowsForm_Crud_App\\07-11\\Form1.cs",
+              "RelativeToolTip": "07-11\\Form1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T21:41:22.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\antho\\Documents\\Distribuida\\github\\WindowsForms\\WindowsForm_Crud_App\\07-11\\Form1.cs",
+              "RelativeDocumentMoniker": "07-11\\Form1.cs",
+              "ToolTip": "C:\\Users\\antho\\Documents\\Distribuida\\07-11 (1)\\07-11\\07-11\\Form1.cs [Design]",
+              "RelativeToolTip": "..\\..\\..\\07-11 (1)\\07-11\\07-11\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T21:39:15.615Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
